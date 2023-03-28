@@ -48,7 +48,6 @@ public class Ventana extends JFrame {
 				this.getContentPane().setBackground(Color.decode("#8FDC91"));
 				this.route();
 	}
-
 	public void route() {
 
 		if(gran_panel!=null) {
@@ -104,7 +103,7 @@ public class Ventana extends JFrame {
 			im1.setIcon(ices);
 			splash.add(im1);
 		
-			JLabel tag4 = new JLabel("Power by Jose ramon Flores y Marco Antonio Marquez");
+			JLabel tag4 = new JLabel("Power by Jose Ramon Flores y Marco Antonio Marquez");
 			tag4.setSize(400,200);
 			tag4.setFont(new Font("Arial", Font.BOLD, 15));
 			tag4.setLocation(120, 350);
@@ -187,15 +186,21 @@ public class Ventana extends JFrame {
 		
 		JButton jbnCancel = new JButton("C A N C E L A R");
 		jbnCancel.setSize(150,30);
-		jbnCancel.setLocation(100, 450);
+		jbnCancel.setLocation(70, 450);
 		jbnCancel.setBackground(Color.RED);
 		login.add(jbnCancel);
 		
 		JButton jbnAccess = new JButton("A C C E D E R");
 		jbnAccess.setSize(150,30);
-		jbnAccess.setLocation(320, 450);
+		jbnAccess.setLocation(360, 450);
 		jbnAccess.setBackground(Color.GREEN);
 		login.add(jbnAccess);
+		
+		JButton jbncrear = new JButton("CREAR CUENTA");
+		jbncrear.setSize(150,30);
+		jbncrear.setLocation(210, 450);
+		jbncrear.setBackground(Color.GRAY);
+		login.add(jbncrear);
 
 		jbnAccess.addActionListener(new ActionListener() {
 
@@ -224,20 +229,20 @@ public class Ventana extends JFrame {
 
 						if(datos[2].equals(email)) {
 							if(datos[3].equals(password)) {
-								
+
+								JOptionPane.showMessageDialog(null, "Acceso correcto");
 								anterior = actual;
 								actual = "principal";
 								route();
-								
-								JOptionPane.showMessageDialog(null, "Acceso correcto");
 								break;
 							}
-						}else {
-							JOptionPane.showMessageDialog(null, "Acceso incorrecto");
-							break;
-						}
+							
+							}
+						line = reader.readLine();
+						
+						
 					}
-					
+
 
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
@@ -246,13 +251,23 @@ public class Ventana extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
 			}
 
 		});
-				
 
+
+		jbncrear.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				anterior = actual;
+				actual = "crearcuenta";
+
+				route();
+			}
 			
+		});	
 
 		return login;
 	}
@@ -360,7 +375,7 @@ public class Ventana extends JFrame {
 		tag1.setBackground(Color.white);
 		comoCrear.add(tag1);
 		
-		ImageIcon imagen =new ImageIcon("Foto 6.png");
+		ImageIcon imagen =new ImageIcon("img7.jpg");
 		JButton im6=new JButton(imagen);
 		im6.setSize(120,100);
 		im6.setLocation(220,100);
@@ -433,10 +448,14 @@ public class Ventana extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				remove(comoCrear);
-				add(crearcuenta());
+				anterior = actual;
+				actual = "crearcuenta";
 				
-				repaint();
+				route();
+				//remove(comoCrear);
+				//add(crearcuenta());
+				
+				//repaint();
 				
 			}
 			
@@ -618,6 +637,19 @@ public class Ventana extends JFrame {
 		saveUsr1.setLocation(300,510);
 		saveUsr1.setBackground(Color.GREEN);
 		cuentapersonal.add(saveUsr1);
+		
+		saveUsr.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				anterior = actual;
+				actual = "cuentapersonal";
+				route();
+			}
+			
+		});
+		
 	
 		return cuentapersonal;
 	}
@@ -633,10 +665,10 @@ public class Ventana extends JFrame {
 			crearcuenta.setLayout(null);
 		
 			
-			JLabel tag1 = new JLabel("CREAR MI CUENTA PERSONAL", JLabel.CENTER);
+			JLabel tag1 = new JLabel("CREAR MI CUENTA PERSONAL");
 			tag1.setFont(new Font("Comic Sans",Font.BOLD,23));
-			tag1.setSize(300, 30);
-			tag1.setLocation(110, 20);
+			tag1.setSize(350, 30);
+			tag1.setLocation(80, 20);
 			tag1.setOpaque(true);
 			tag1.setBackground(Color.white);
 			crearcuenta.add(tag1);
@@ -782,17 +814,23 @@ public class Ventana extends JFrame {
 			crearcuenta.add(mi_check6);
 			
 			JButton saveUsr = new JButton("C A N C E L A R");
-			saveUsr.setSize(200, 35);
-			saveUsr.setLocation(80,510);
+			saveUsr.setSize(150, 35);
+			saveUsr.setLocation(70,510);
 			saveUsr.setBackground(Color.RED);
 			crearcuenta.add(saveUsr);
 			
 			
 			JButton saveUsr1 = new JButton("Crear cuenta");
-			saveUsr1.setSize(200, 35);
-			saveUsr1.setLocation(300,510);
+			saveUsr1.setSize(150, 35);
+			saveUsr1.setLocation(220,510);
 			saveUsr1.setBackground(Color.GREEN);
 			crearcuenta.add(saveUsr1);
+			
+			JButton salir = new JButton("Regresar a login");
+			salir.setSize(150, 35);
+			salir.setLocation(370,510);
+			salir.setBackground(Color.GRAY);
+			crearcuenta.add(salir);
 		
 			saveUsr1.addActionListener(new ActionListener() {
 
@@ -820,9 +858,37 @@ public class Ventana extends JFrame {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
+					JOptionPane.showMessageDialog(null, "Usuario creado");
 				}
 				
 			});
+			
+			saveUsr.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					anterior = actual;
+					actual = "crearcuenta";
+					route();
+					
+				}
+				
+			});
+			
+			salir.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					anterior = actual;
+					actual = "login";
+					route();
+					
+				}
+				
+			});
+			
 			return crearcuenta;
 		}
 	
@@ -834,136 +900,67 @@ public class Ventana extends JFrame {
 			listausuarios.setSize(600, 600);
 			listausuarios.setBackground(Color.CYAN);
 			listausuarios.setLayout(null);
-			
-			JLabel tag10 = new JLabel("Usuarios", JLabel.CENTER);
-			tag10.setFont(new Font("Comic Sans",Font.BOLD,23));
-			tag10.setSize(300, 40);
-			tag10.setLocation(100, 10);
-			tag10.setOpaque(true);
-			tag10.setBackground(Color.white);
-			listausuarios.add(tag10);
-
-			JLabel tag11 = new JLabel("Consulta los usuarios registrados");
-			tag11.setSize(300,20);
-			tag11.setFont(new Font("Arial", Font.BOLD, 15));
-			tag11.setLocation(100, 65);
-			listausuarios.add(tag11);
-
-			JButton loadUsr = new JButton("CONSULTAR USUARIOS");
-			loadUsr.setSize(380, 40);
-			loadUsr.setLocation(50, 85);
-			loadUsr.setFont(new Font("Comic Sans",Font.ITALIC,15));
-			listausuarios.add(loadUsr);
-
-			loadUsr.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-
-					String[] columnNames = { "Nombre", "Apellidos", "Correo", "Password" };
-
-					String[][] data = new String[10][4];
-					int i = 0;
-					BufferedReader reader;
-
-					try {
-						reader = new BufferedReader(new FileReader("usuarios.txt"));
-
-						String line = reader.readLine();
-						JScrollPane sp = null;
-
-						while (line != null) {
-
-							data[i] = line.split(",");
-
-							JTable j = new JTable(data, columnNames);
-							sp = new JScrollPane(j);
-							sp.setSize(300,200);
-							sp.setLocation(100, 160); 
-
-							line = reader.readLine();
-							i++;
-						} 
-
-						listausuarios.add(sp);
-
-
-					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} 
-
-				}
-
-			});
-
-			/*listausuarios.setVisible(true);
-			listausuarios.setSize(500, 700);
-			listausuarios.setBackground(Color.CYAN);
-			listausuarios.setLayout(null);
 		
+			JLabel tag11 = new JLabel("Consulta los usuarios",JLabel.CENTER);
+			tag11.setSize(300,20);
+			tag11.setFont(new Font("Arial", Font.BOLD,20 ));
+			tag11.setForeground(Color.WHITE);
+			tag11.setLocation(70, 40);
+			listausuarios.add(tag11);
 			
-			JLabel tag1 = new JLabel("LISTA DE USUARIOS", JLabel.CENTER);
-			tag1.setFont(new Font("Comic Sans",Font.BOLD,23));
-			tag1.setSize(400, 20);
-			tag1.setLocation(100, 10);
-			tag1.setOpaque(true);
-			tag1.setBackground(Color.white);
-			listausuarios.add(tag1);
+			JLabel tag12 = new JLabel ("Editar");
+			tag12.setSize(150,20);
+			tag12.setFont(new Font("Arial", Font.BOLD, 20));
+			tag12.setForeground(Color.WHITE);
+			tag12.setLocation(70, 100);
+			listausuarios.add(tag12);
 			
-			
-			JLabel tag2 = new JLabel("Seleccione un usuario");
-			tag2.setFont(new Font("arial",Font.BOLD,15));
-			tag2.setSize(200,30);
-			tag2.setLocation(50,145);
-			this.add(tag2);
-			
-
 			JComboBox user = new JComboBox();
 			user.setSize(300,40);
-			user.setLocation(48,180);
-			user.addItem("editar a jonathan");
-			
-			this.add(user);
-			this.repaint();
-			
-			JPanel crear=new JPanel ();
-			crear.setBackground(Color.decode("#FC1A1A"));
-			crear.setSize(455, 90);
-			crear.setLocation(20,270);
-			add(crear);
-		
-			JPanel crear2=new JPanel();
-			crear2.setBackground(Color.decode("#FC1A1A"));
-			crear2.setSize(700,600);
-			crear2.setLocation(0,0);
-			crear2.setLayout(null);
-			add(crear2);
+			user.setLocation(70,135);
+			user.addItem("");
+			listausuarios.add(user);
 
-			String  [] cabezera=new String [] {"USUARIO","NOMBRE","ACCIONES"};
-			Object [][] filas=new  Object [3][3] ;
-						
-			
-			JTable table =new JTable (filas,cabezera);
-			table.setBackground(Color.decode("#FFFFFF"));
-			table.setLayout(new BorderLayout());
-			table.setLocation(0,70);
-			crear.add(new JScrollPane(table));
-			
-		
+			String[] columnNames = { "Nombre", "Apellidos", "Correo", "contraseña" };
 
-			JButton saveUsr = new JButton("A C C E D E R");
-			saveUsr.setSize(380,30);
-			saveUsr.setLocation(100, 450);
-			crear.add(saveUsr);*/
-			
-			return listausuarios;
-			
+			String[][] data = new String[10][4];
+			int i = 0;
+			BufferedReader reader;
+
+			try {
+				reader = new BufferedReader(new FileReader("usuarios.txt"));
+
+				String line = reader.readLine();
+				JScrollPane sp = null;
+
+				while (line != null) {
+
+					data[i] = line.split(",");
+
+					JTable j = new JTable(data, columnNames);
+					sp = new JScrollPane(j);
+					sp.setSize(450,200);
+					sp.setLocation(70, 220); 
+
+					line = reader.readLine();
+					i++;
+				} 
+
+				listausuarios.add(sp);
+
+
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			return listausuarios; 
+
 		}
+
+			
 		
 	//------------------------------Panel de principal -------------------------------------------
 	public JPanel principal() {
@@ -1039,9 +1036,13 @@ public class Ventana extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub			
 				
-				remove(principal);
-				add(login());
-				route();	
+				anterior = actual;
+				actual = "login";
+				
+				route();
+				//remove(principal);
+				//add(login());
+				//route();	
 			}
 		});
 		
@@ -1081,6 +1082,8 @@ public class Ventana extends JFrame {
 			
 		});
 		return principal;
+		
+	
 	}
 
 	
